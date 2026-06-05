@@ -50,8 +50,15 @@ jobs:
           ruby-version: '3.2'
           bundler-cache: true
 
+      - name: Add Bundler binstubs to PATH
+        run: |
+          bundle binstubs jekyll --path .bundle/bin
+          echo "$PWD/.bundle/bin" >> "$GITHUB_PATH"
+
       - name: Check Jekyll
-        run: bundle exec jekyll --version
+        run: |
+          which jekyll
+          jekyll --version
 
       - name: Download IG Publisher
         run: |
