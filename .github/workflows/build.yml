@@ -72,16 +72,7 @@ jobs:
         if: always()
         with:
           if-no-files-found: warn
-          name: ig-output-${{ github.run_number }}
-          path: output/
-          retention-days: 30
-
-      - name: Upload output as artifact
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          if-no-files-found: warn
-          name: ig-output-${{ github.run_number }}
+          name: ig-output-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/
           retention-days: 30
 
@@ -90,7 +81,7 @@ jobs:
         if: always()
         with:
           if-no-files-found: warn
-          name: qa-report-${{ github.run_number }}
+          name: qa-report-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/qa.html
           retention-days: 30
 
