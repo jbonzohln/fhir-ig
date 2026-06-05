@@ -63,6 +63,7 @@ jobs:
             sushi
 
       - name: Update Publisher with Docker
+        if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
         run: |
           docker run --rm \
             -v "$PWD:/workspaces" \
