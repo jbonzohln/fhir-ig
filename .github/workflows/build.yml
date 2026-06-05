@@ -14,25 +14,44 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-24.04
+    timeout-minutes: 60
 
     permissions:
       contents: read
 
+    env:
+      IG_TOOLBOX_IMAGE: ghcr.io/bonfhir/ig-toolbox:23382ec329204d4d26d3e9f79f3da40d86207b82
+
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          persist-credentials: false
 
       - name: Prepare cache directories
         run: |
           mkdir -p .fhir/packages
+          mkdir -p input-cache
 
       - name: Cache FHIR packages
-        uses: actions/cache@v4
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
         with:
           path: .fhir/packages
-          key: fhir-packages-${{ hashFiles('sushi-config.yaml', 'ig.ini') }}
+          key: fhir-packages-${{ runner.os }}-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package-list.json') }}
           restore-keys: |
-            fhir-packages-
+            fhir-packages-${{ runner.os }}-
+
+      - name: Cache IG Publisher input-cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: input-cache
+          key: ig-publisher-${{ runner.os }}-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package-list.json') }}
+          restore-keys: |
+            ig-publisher-${{ runner.os }}-
+
+      - name: Pull IG toolbox Docker image
+        run: |
+          docker pull "$IG_TOOLBOX_IMAGE"
 
       - name: Build IG with Docker
         run: |
@@ -40,7 +59,7 @@ jobs:
             -v "$PWD:/workspaces" \
             -v "$PWD/.fhir:/root/.fhir" \
             -w /workspaces \
-            ghcr.io/bonfhir/ig-toolbox:latest \
+            "$IG_TOOLBOX_IMAGE" \
             sushi
 
       - name: Update Publisher with Docker
@@ -49,7 +68,7 @@ jobs:
             -v "$PWD:/workspaces" \
             -v "$PWD/.fhir:/root/.fhir" \
             -w /workspaces \
-            ghcr.io/bonfhir/ig-toolbox:latest \
+            "$IG_TOOLBOX_IMAGE" \
             ./_updatePublisher.sh -y
 
       - name: Run Publisher with Docker
@@ -58,7 +77,7 @@ jobs:
             -v "$PWD:/workspaces" \
             -v "$PWD/.fhir:/root/.fhir" \
             -w /workspaces \
-            ghcr.io/bonfhir/ig-toolbox:latest \
+            "$IG_TOOLBOX_IMAGE" \
             ./_genonce.sh
 
       - name: Fix Docker-created file permissions
@@ -67,8 +86,14 @@ jobs:
           sudo chown -R "$USER:$USER" .fhir input-cache output fsh-generated 2>/dev/null || true
           chmod -R u+rwX .fhir input-cache output fsh-generated 2>/dev/null || true
 
+      - name: Verify expected IG output
+        if: success()
+        run: |
+          test -d output
+          test -f output/qa.html
+
       - name: Upload output as artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           if-no-files-found: warn
@@ -77,7 +102,7 @@ jobs:
           retention-days: 30
 
       - name: Upload QA report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
         if: always()
         with:
           if-no-files-found: warn
