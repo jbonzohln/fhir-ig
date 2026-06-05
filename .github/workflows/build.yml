@@ -7,9 +7,16 @@ on:
     branches: [ main, master ]
   workflow_dispatch:
 
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
+
+    permissions:
+      contents: read
 
     steps:
       - name: Checkout
@@ -21,41 +28,52 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Cache FHIR packages
         uses: actions/cache@v4
         with:
           path: ~/.fhir/packages
-          key: fhir-packages-${{ hashFiles('sushi-config.yaml') }}
+          key: fhir-packages-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package.json', 'package-lock.json') }}
           restore-keys: |
             fhir-packages-
 
-      - name: Cache IG Publisher JAR
-        uses: actions/cache@v4
-        with:
-          path: input-cache/publisher.jar
-          key: ig-publisher-${{ hashFiles('input-cache/publisher.jar') }}
-          restore-keys: |
-            ig-publisher-
-
       - name: Install SUSHI
-        run: npm install -g fsh-sushi
+        run: npm install -g fsh-sushi@3.14.0
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: '3.2'
+          bundler-cache: true
 
-      - name: Install Jekyll
-        run: |
-          gem install jekyll bundler
-          jekyll --version
+      - name: Check Jekyll
+        run: bundle exec jekyll --version
 
       - name: Download IG Publisher
         run: |
+          set -euo pipefail
+
+          PUBLISHER_URL="https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.8/publisher.jar"
+          PUBLISHER_SHA256="4eafde1dfb52c785d6b5998c34bcdc19791602f2685e2a1427cc6df98c7d27c6"
+
           mkdir -p input-cache
           if [ ! -f input-cache/publisher.jar ]; then
-            curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
-              -o input-cache/publisher.jar
+            curl --fail --show-error --silent --location \
+              "${PUBLISHER_URL}" \
+              --output input-cache/publisher.jar
+          fi
+
+          if ! echo "${PUBLISHER_SHA256}  input-cache/publisher.jar" | sha256sum -c -; then
+            echo "Publisher hash mismatch. Re-downloading..."
+            rm -f input-cache/publisher.jar
+            curl --fail --show-error --silent --location \
+              "${PUBLISHER_URL}" \
+              --output input-cache/publisher.jar
+            echo "${PUBLISHER_SHA256}  input-cache/publisher.jar" | sha256sum -c -
           fi
 
       - name: Run SUSHI
@@ -68,10 +86,16 @@ jobs:
             -tx https://tx.fhir.org/r4 \
             -no-sushi
 
+      - name: Verify IG output exists
+        run: |
+          test -d output
+          test -f output/index.html
+
       - name: Upload output as artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
+          if-no-files-found: warn
           name: ig-output-${{ github.run_number }}
           path: output/
           retention-days: 30
@@ -80,25 +104,31 @@ jobs:
         uses: actions/upload-artifact@v4
         if: always()
         with:
+          if-no-files-found: warn
           name: qa-report-${{ github.run_number }}
           path: output/qa.html
           retention-days: 30
 
-      - name: Check for QA errors
+      - name: Report QA artifact status
         if: always()
         run: |
           if [ -f output/qa.html ]; then
-            ERROR_COUNT=$(grep -o 'errors' output/qa.html | wc -l || true)
-            echo "QA report generated. Check the qa-report artifact for details."
+            ERROR_COUNT=$(grep -oi 'errors' output/qa.html | wc -l || true)
+            echo "QA report generated. Found ${ERROR_COUNT} occurrence(s) of the word 'errors'."
+            echo "Check the qa-report artifact for details."
+          else
+            echo "QA report was not generated."
           fi
 
   deploy-pages:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: build
-    if: github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master'
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
     permissions:
+      contents: read
       pages: write
       id-token: write
+
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
