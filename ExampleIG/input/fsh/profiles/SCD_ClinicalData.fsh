@@ -86,14 +86,17 @@ Description: """
 * reasonReference only Reference(SCDConditionEncounterDiagnosis or SCDConditionProblemsAndHealthConcerns)
 
 // SCD-specific: link transfusion procedure to blood product(s) used
+// Note: R4 Procedure.usedReference only allows Reference(Device|Medication|Substance).
+// BiologicallyDerivedProduct is not an allowed type; document the linkage via extension
+// or usedCode. The usedReference element is kept MS for Medication and Device references.
 * usedReference MS
-* usedReference ^short = "Blood product(s) administered (SCDBiologicallyDerivedProduct)"
+* usedReference ^short = "Medications or devices used in the procedure"
 * usedReference ^comment = """
-  When this Procedure represents a transfusion (simple or exchange), this
-  element SHALL reference the SCDBiologicallyDerivedProduct instance(s)
-  documenting the specific blood product(s) administered.
+  Note: FHIR R4 Procedure.usedReference does not support BiologicallyDerivedProduct.
+  Links to blood products administered during a transfusion procedure should be
+  documented using a custom extension (scd-blood-product-reference) defined in
+  SCD_Extensions.fsh, referencing SCDBiologicallyDerivedProduct instances.
 """
-* usedReference only Reference(SCDBiologicallyDerivedProduct or SCDMedication or Device)
 
 // TODO: Add value set binding for transfusion procedures:
 // * code from SCDProcedureVS (extensible)
@@ -426,7 +429,7 @@ Description: """
 // Request linkage — back to the transfusion ServiceRequest
 * request MS
 * request ^short = "Reference to the transfusion order (SCDServiceRequest)"
-* request only Reference(SCDServiceRequest)
+* request only Reference(ServiceRequest)
 
 // Collection information
 * collection MS
