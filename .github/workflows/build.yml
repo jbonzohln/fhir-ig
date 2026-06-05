@@ -37,7 +37,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.fhir/packages
-          key: fhir-packages-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package.json', 'package-lock.json') }}
+          key: fhir-packages-${{ hashFiles('sushi-config.yaml', 'ig.ini', 'package.json', 'package-lock.json') }}
           restore-keys: |
             fhir-packages-
 
