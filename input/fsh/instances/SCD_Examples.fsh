@@ -373,7 +373,9 @@ Usage: #example
 * reasonCode[=].text = "Acute VOC with HbS% 58%; exchange transfusion to reduce HbS <30%"
 * reasonReference[+] = Reference(maya-johnson-voc-encounter-dx)
 
-// Note: Blood product linkage via extension (R4 usedReference does not allow BiologicallyDerivedProduct)
+// NOTE: FHIR R4 Procedure.usedReference cannot reference BiologicallyDerivedProduct.
+// The blood product linkage is demonstrated by the BiologicallyDerivedProduct example
+// and should be modeled with an extension if a direct Procedure-to-product link is required.
 // * extension[scd-blood-product-reference].valueReference = Reference(prbcs-antigen-matched-example)
 
 

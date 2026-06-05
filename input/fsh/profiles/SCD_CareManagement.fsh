@@ -149,17 +149,16 @@ Description: """
 * period MS
 * period ^short = "Plan effective period"
 * author MS
-* author only Reference(SCDPractitioner or SCDPractitionerRole or SCDOrganization)
+* author ^short = "Author of the SCD care plan"
 * careTeam MS
 * addresses MS
-* addresses only Reference(SCDConditionProblemsAndHealthConcerns)
+* addresses ^short = "Conditions addressed by the SCD care plan"
 * goal MS
 * activity MS
 * activity.reference MS
 * activity.detail MS
 * activity.detail.status MS
 * activity.detail.description MS
-
 
 // ==============================================================================
 // SCDServiceRequest
@@ -223,13 +222,12 @@ Description: """
 * occurrence[x] MS
 * authoredOn MS
 * requester MS
-* requester only Reference(SCDPractitioner or SCDPractitionerRole)
+* requester ^short = "Requester of the SCD service request"
 * performer MS
-* performer only Reference(SCDPractitioner or SCDPractitionerRole or SCDOrganization)
+* performer ^short = "Requested performer for the SCD service request"
 * reasonCode MS
 * reasonReference MS
-* reasonReference only Reference(SCDConditionEncounterDiagnosis or SCDConditionProblemsAndHealthConcerns)
-
+* reasonReference ^short = "Condition, observation, report, or document supporting the request"
 
 // ==============================================================================
 // SCDMedication

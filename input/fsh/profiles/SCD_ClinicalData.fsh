@@ -80,23 +80,17 @@ Description: """
 * performed[x] MS
 * performer MS
 * performer.actor MS
-* performer.actor only Reference(SCDPractitioner or SCDPractitionerRole or SCDOrganization)
+* performer.actor ^short = "Practitioner, PractitionerRole, Organization, Patient, RelatedPerson, or Device involved in the procedure"
 * reasonCode MS
 * reasonReference MS
-* reasonReference only Reference(SCDConditionEncounterDiagnosis or SCDConditionProblemsAndHealthConcerns)
+* reasonReference ^short = "Condition, observation, procedure, report, or document supporting the procedure"
 
 // SCD-specific: link transfusion procedure to blood product(s) used
-// Note: R4 Procedure.usedReference only allows Reference(Device|Medication|Substance).
-// BiologicallyDerivedProduct is not an allowed type; document the linkage via extension
-// or usedCode. The usedReference element is kept MS for Medication and Device references.
+// NOTE: FHIR R4 Procedure.usedReference only allows Device, Medication, or Substance.
+// BiologicallyDerivedProduct is not an allowed target for Procedure.usedReference in R4.
+// Blood product linkage may be represented through narrative or a future extension.
 * usedReference MS
-* usedReference ^short = "Medications or devices used in the procedure"
-* usedReference ^comment = """
-  Note: FHIR R4 Procedure.usedReference does not support BiologicallyDerivedProduct.
-  Links to blood products administered during a transfusion procedure should be
-  documented using a custom extension (scd-blood-product-reference) defined in
-  SCD_Extensions.fsh, referencing SCDBiologicallyDerivedProduct instances.
-"""
+* usedReference ^short = "Device, medication, or substance used during the procedure"
 
 // TODO: Add value set binding for transfusion procedures:
 // * code from SCDProcedureVS (extensible)
@@ -429,7 +423,7 @@ Description: """
 // Request linkage — back to the transfusion ServiceRequest
 * request MS
 * request ^short = "Reference to the transfusion order (SCDServiceRequest)"
-* request only Reference(ServiceRequest)
+* request only Reference(SCDServiceRequest)
 
 // Collection information
 * collection MS
