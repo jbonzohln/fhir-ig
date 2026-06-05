@@ -22,6 +22,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Prepare cache directories
+        run: |
+          mkdir -p .fhir/packages
+
       - name: Cache FHIR packages
         uses: actions/cache@v4
         with:
@@ -56,6 +60,21 @@ jobs:
             -w /workspaces \
             ghcr.io/bonfhir/ig-toolbox:latest \
             ./_genonce.sh
+
+      - name: Fix Docker-created file permissions
+        if: always()
+        run: |
+          sudo chown -R "$USER:$USER" .fhir input-cache output fsh-generated 2>/dev/null || true
+          chmod -R u+rwX .fhir input-cache output fsh-generated 2>/dev/null || true
+
+      - name: Upload output as artifact
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          if-no-files-found: warn
+          name: ig-output-${{ github.run_number }}
+          path: output/
+          retention-days: 30
 
       - name: Upload output as artifact
         uses: actions/upload-artifact@v4
