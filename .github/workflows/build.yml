@@ -40,6 +40,16 @@ jobs:
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+
+      - name: Install Jekyll
+        run: |
+          gem install jekyll bundler
+          jekyll --version
+
       - name: Download IG Publisher
         run: |
           mkdir -p input-cache
