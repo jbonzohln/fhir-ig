@@ -52,7 +52,8 @@ jobs:
 
       - name: Add Bundler binstubs to PATH
         run: |
-          bundle binstubs jekyll --path .bundle/bin
+          bundle config set bin .bundle/bin
+          bundle binstubs jekyll
           echo "$PWD/.bundle/bin" >> "$GITHUB_PATH"
 
       - name: Check Jekyll
