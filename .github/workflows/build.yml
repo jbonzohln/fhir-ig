@@ -86,34 +86,34 @@ jobs:
             echo "QA report was not generated."
           fi
 
-  deploy-pages:
-    runs-on: ubuntu-24.04
-    needs: build
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Download build artifact
-        uses: actions/download-artifact@v4
-        with:
-          name: ig-output-${{ github.run_number }}
-          path: output/
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v4
-
-      - name: Upload to Pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: output/
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+#  deploy-pages:
+#    runs-on: ubuntu-24.04
+#    needs: build
+#    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
+#    permissions:
+#      contents: read
+#      pages: write
+#      id-token: write
+#
+#    environment:
+#      name: github-pages
+#      url: ${{ steps.deployment.outputs.page_url }}
+#
+#    steps:
+#      - name: Download build artifact
+#        uses: actions/download-artifact@v4
+#        with:
+#          name: ig-output-${{ github.run_number }}
+#          path: output/
+#
+#      - name: Setup Pages
+#        uses: actions/configure-pages@v4
+#
+#      - name: Upload to Pages
+#        uses: actions/upload-pages-artifact@v3
+#        with:
+#          path: output/
+#
+#      - name: Deploy to GitHub Pages
+#        id: deployment
+#        uses: actions/deploy-pages@v4
