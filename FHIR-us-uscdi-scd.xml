@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<specification xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ciUrl="" defaultVersion="current" defaultWorkgroup="pc" url="http://hl7.org/fhir/us/uscdi-scd">
+<version code="current" url=""/>
+<artifactPageExtension value="-definitions"/>
+<artifactPageExtension value="-examples"/>
+<artifactPageExtension value="-mappings"/>
+<artifact id="AllergyIntolerance/maya-johnson-nsaid-allergy" key="AllergyIntolerance-maya-johnson-nsaid-allergy" name="Example AllergyIntolerance — NSAID Hypersensitivity"/>
+<artifact id="BiologicallyDerivedProduct/prbcs-antigen-matched-example" key="BiologicallyDerivedProduct-prbcs-antigen-matched-example" name="Example BiologicallyDerivedProduct — Antigen-Matched pRBCs"/>
+<artifact id="Condition/maya-johnson-voc-encounter-dx" key="Condition-maya-johnson-voc-encounter-dx" name="Example Condition — Acute Vaso-Occlusive Crisis (Encounter Diagnosis)"/>
+<artifact id="Condition/maya-johnson-scd-diagnosis" key="Condition-maya-johnson-scd-diagnosis" name="Example Condition — HbSS Sickle Cell Disease (Problem List)"/>
+<artifact id="Encounter/maya-johnson-ed-encounter" key="Encounter-maya-johnson-ed-encounter" name="Example Encounter — ED Visit for Vaso-Occlusive Crisis"/>
+<artifact id="Observation/maya-johnson-hgb-fractionation" key="Observation-maya-johnson-hgb-fractionation" name="Example Lab Result — Hemoglobin Fractionation (Pre-Transfusion)"/>
+<artifact id="Medication/hydroxyurea-medication-example" key="Medication-hydroxyurea-medication-example" name="Example Medication — Hydroxyurea (Siklos)"/>
+<artifact id="Organization/metro-scd-center-org" key="Organization-metro-scd-center-org" name="Example Organization — Metro Sickle Cell Center"/>
+<artifact id="Patient/maya-johnson-patient" key="Patient-maya-johnson-patient" name="Example Patient — Maya Johnson (SCD HbSS)"/>
+<artifact id="Practitioner/dr-sarah-chen-practitioner" key="Practitioner-dr-sarah-chen-practitioner" name="Example Practitioner — Dr. Sarah Chen, Hematologist"/>
+<artifact id="Procedure/maya-johnson-exchange-transfusion" key="Procedure-maya-johnson-exchange-transfusion" name="Example Procedure — Automated Red Cell Exchange Transfusion"/>
+<artifact id="ServiceRequest/exchange-transfusion-order-example" key="ServiceRequest-exchange-transfusion-order-example" name="Example ServiceRequest — Exchange Transfusion Order"/>
+<artifact id="Observation/maya-johnson-spo2" key="Observation-maya-johnson-spo2" name="Example Vital Sign — Oxygen Saturation (SpO2) on ED Arrival"/>
+<artifact id="Observation/maya-johnson-pain-score" key="Observation-maya-johnson-pain-score" name="Example Vital Sign — Pain Severity Score (NRS) on ED Arrival"/>
+<artifact id="ValueSet/scd-acute-complication-vs" key="ValueSet-scd-acute-complication-vs" name="SCD Acute Complication Value Set"/>
+<artifact id="StructureDefinition/scd-blood-product-age" key="StructureDefinition-scd-blood-product-age" name="SCD Blood Product Age at Transfusion"/>
+<artifact id="CodeSystem/scd-blood-product-processing-cs" key="CodeSystem-scd-blood-product-processing-cs" name="SCD Blood Product Processing Code System"/>
+<artifact id="ValueSet/scd-blood-product-type-vs" key="ValueSet-scd-blood-product-type-vs" name="SCD Blood Product Type Value Set"/>
+<artifact id="ValueSet/scd-diagnosis-vs" key="ValueSet-scd-diagnosis-vs" name="SCD Diagnosis Value Set"/>
+<artifact id="StructureDefinition/scd-genotype" key="StructureDefinition-scd-genotype" name="SCD Genotype"/>
+<artifact id="ValueSet/scd-genotype-vs" key="ValueSet-scd-genotype-vs" name="SCD Genotype Value Set"/>
+<artifact id="StructureDefinition/scd-hydroxyurea-adherence" key="StructureDefinition-scd-hydroxyurea-adherence" name="SCD Hydroxyurea Adherence"/>
+<artifact id="StructureDefinition/scd-iron-chelation-indication" key="StructureDefinition-scd-iron-chelation-indication" name="SCD Iron Chelation Indication"/>
+<artifact id="ValueSet/scd-laboratory-panel-vs" key="ValueSet-scd-laboratory-panel-vs" name="SCD Laboratory Panel Value Set"/>
+<artifact id="ValueSet/scd-medication-vs" key="ValueSet-scd-medication-vs" name="SCD Medication Value Set"/>
+<artifact id="StructureDefinition/scd-newborn-screen-reference" key="StructureDefinition-scd-newborn-screen-reference" name="SCD Newborn Screen Reference"/>
+<artifact id="CodeSystem/scd-observation-category-cs" key="CodeSystem-scd-observation-category-cs" name="SCD Observation Category Code System"/>
+<artifact id="ValueSet/scd-procedure-vs" key="ValueSet-scd-procedure-vs" name="SCD Procedure Value Set"/>
+<artifact id="ValueSet/scd-red-cell-antigen-vs" key="ValueSet-scd-red-cell-antigen-vs" name="SCD Red Cell Antigen Value Set"/>
+<artifact id="StructureDefinition/scd-transfusion-antigen-match" key="StructureDefinition-scd-transfusion-antigen-match" name="SCD Transfusion Red Cell Antigen Match Profile"/>
+<artifact id="StructureDefinition/scd-voc-frequency" key="StructureDefinition-scd-voc-frequency" name="SCD Vaso-Occlusive Crisis Frequency"/>
+<artifact id="ValueSet/scd-vital-signs-vs" key="ValueSet-scd-vital-signs-vs" name="SCD Vital Signs Value Set"/>
+<artifact id="StructureDefinition/uscdi-scd-allergyintolerance" key="StructureDefinition-uscdi-scd-allergyintolerance" name="USCDI-SCD AllergyIntolerance"/>
+<artifact id="StructureDefinition/uscdi-scd-biologicallyderivedproduct" key="StructureDefinition-uscdi-scd-biologicallyderivedproduct" name="USCDI-SCD BiologicallyDerivedProduct"/>
+<artifact id="StructureDefinition/uscdi-scd-careplan" key="StructureDefinition-uscdi-scd-careplan" name="USCDI-SCD CarePlan"/>
+<artifact id="CapabilityStatement/uscdi-scd-client" key="CapabilityStatement-uscdi-scd-client" name="USCDI-SCD Client CapabilityStatement"/>
+<artifact id="StructureDefinition/uscdi-scd-condition-encounter-diagnosis" key="StructureDefinition-uscdi-scd-condition-encounter-diagnosis" name="USCDI-SCD Condition Encounter Diagnosis"/>
+<artifact id="StructureDefinition/uscdi-scd-condition-problems" key="StructureDefinition-uscdi-scd-condition-problems" name="USCDI-SCD Condition Problems and Health Concerns"/>
+<artifact id="StructureDefinition/uscdi-scd-encounter" key="StructureDefinition-uscdi-scd-encounter" name="USCDI-SCD Encounter"/>
+<artifact id="StructureDefinition/uscdi-scd-laboratory-result" key="StructureDefinition-uscdi-scd-laboratory-result" name="USCDI-SCD Laboratory Result"/>
+<artifact id="StructureDefinition/uscdi-scd-location" key="StructureDefinition-uscdi-scd-location" name="USCDI-SCD Location"/>
+<artifact id="StructureDefinition/uscdi-scd-medication" key="StructureDefinition-uscdi-scd-medication" name="USCDI-SCD Medication"/>
+<artifact id="StructureDefinition/uscdi-scd-organization" key="StructureDefinition-uscdi-scd-organization" name="USCDI-SCD Organization"/>
+<artifact id="StructureDefinition/uscdi-scd-patient" key="StructureDefinition-uscdi-scd-patient" name="USCDI-SCD Patient"/>
+<artifact id="StructureDefinition/uscdi-scd-practitioner" key="StructureDefinition-uscdi-scd-practitioner" name="USCDI-SCD Practitioner"/>
+<artifact id="StructureDefinition/uscdi-scd-practitionerrole" key="StructureDefinition-uscdi-scd-practitionerrole" name="USCDI-SCD PractitionerRole"/>
+<artifact id="StructureDefinition/uscdi-scd-procedure" key="StructureDefinition-uscdi-scd-procedure" name="USCDI-SCD Procedure"/>
+<artifact id="CapabilityStatement/uscdi-scd-server" key="CapabilityStatement-uscdi-scd-server" name="USCDI-SCD Server CapabilityStatement"/>
+<artifact id="StructureDefinition/uscdi-scd-servicerequest" key="StructureDefinition-uscdi-scd-servicerequest" name="USCDI-SCD ServiceRequest"/>
+<artifact id="StructureDefinition/uscdi-scd-vital-signs" key="StructureDefinition-uscdi-scd-vital-signs" name="USCDI-SCD Vital Signs"/>
+<page key="NA" name="(NA)"/>
+<page key="many" name="(many)"/>
+<page key="artifacts" name="Artifacts Summary"/>
+<page key="audience" name="Audience"/>
+<page key="background" name="Background"/>
+<page key="changes" name="Change Log"/>
+<page key="conformance" name="Conformance Requirements"/>
+<page key="downloads" name="Downloads"/>
+<page key="extensions" name="Extensions"/>
+<page key="index" name="Home"/>
+<page key="introduction" name="Introduction"/>
+<page key="overview" name="Overview"/>
+<page key="profiles" name="Profiles"/>
+<page key="scope_and_usage" name="Scope and Usage"/>
+<page key="security" name="Security and Privacy"/>
+<page key="toc" name="Table of Contents"/>
+<page key="terminology" name="Terminology"/>
+</specification>

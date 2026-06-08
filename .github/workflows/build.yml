@@ -21,20 +21,20 @@ jobs:
         uses: actions/setup-java@be666c2fcd27ec809703dec50e508c2fdc7f6654
         with:
           distribution: temurin
-          java-version: '17'
+          java-version: '25'
 
       - name: Setup Node
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e
         with:
-          node-version: '20'
+          node-version: '24'
 
       - name: Setup Ruby + Jekyll
         uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f
         with:
-          ruby-version: '3.2'
-      - run: gem install --user-install bundler jekyll
+          ruby-version: '4.0'
       - run: |
           echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
+      - run: gem install --user-install bundler jekyll
 
       - name: Install SUSHI
         run: npm install -g fsh-sushi
