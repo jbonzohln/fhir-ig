@@ -33,14 +33,11 @@ jobs:
         with:
           ruby-version: '4.0'
 
-      - name: Add Ruby gems user bin to PATH
-        run: echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
-
-      - name: Install Bundler and gems (use Gemfile.lock)
-        run: bundle install
-
-      - name: Install SUSHI
-        run: npm install -g fsh-sushi@3.19.0
+      - name: Install required tools (jekyll, sushi)
+        run: |
+          echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
+          bundle install
+          npm install -g fsh-sushi@3.19.0
 
       - name: Prepare cache directories
         run: |
