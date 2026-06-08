@@ -2,46 +2,52 @@ name: Build FHIR IG
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [main]
   pull_request:
-    branches: [ main, master ]
-  workflow_dispatch:
-
-concurrency:
-  group: pages-${{ github.ref }}
-  cancel-in-progress: true
 
 jobs:
   build:
-    runs-on: ubuntu-24.04
-    timeout-minutes: 60
-
-    permissions:
-      contents: read
-
-    env:
-      IG_TOOLBOX_IMAGE: ghcr.io/bonfhir/ig-toolbox:23382ec329204d4d26d3e9f79f3da40d86207b82
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
 
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Ruby + Jekyll
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.2'
+      - run: gem install jekyll bundler
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
+
       - name: Prepare cache directories
         run: |
-          mkdir -p .fhir/packages
+          mkdir -p ~/.fhir/packages
           mkdir -p input-cache
 
       - name: Cache FHIR packages
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
-          path: .fhir/packages
+          path: ~/.fhir/packages
           key: fhir-packages-${{ runner.os }}-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package-list.json') }}
           restore-keys: |
             fhir-packages-${{ runner.os }}-
 
-      - name: Cache IG Publisher input-cache
+      - name: Cache IG publisher input-cache
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: input-cache
@@ -49,107 +55,11 @@ jobs:
           restore-keys: |
             ig-publisher-${{ runner.os }}-
 
-      - name: Pull IG toolbox Docker image
-        run: |
-          docker pull "$IG_TOOLBOX_IMAGE"
-
-      - name: Build IG with Docker
-        run: |
-          docker run --rm \
-          -v "$PWD:/workspaces" \
-          -v "$PWD/.fhir:/root/.fhir" \
-          -w /workspaces \
-          "$IG_TOOLBOX_IMAGE" \
-          bash -c "npm install -g fsh-sushi && sushi"
-
-      - name: Update Publisher with Docker
+      - name: Download IG Publisher
         if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
         run: |
-          docker run --rm \
-            -v "$PWD:/workspaces" \
-            -v "$PWD/.fhir:/root/.fhir" \
-            -w /workspaces \
-            "$IG_TOOLBOX_IMAGE" \
-            ./_updatePublisher.sh -y
+          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
+            -o input-cache/publisher.jar
 
-      - name: Run Publisher with Docker
-        run: |
-          docker run --rm \
-            -v "$PWD:/workspaces" \
-            -v "$PWD/.fhir:/root/.fhir" \
-            -w /workspaces \
-            "$IG_TOOLBOX_IMAGE" \
-            ./_genonce.sh
-
-      - name: Fix Docker-created file permissions
-        if: always()
-        run: |
-          sudo chown -R "$USER:$USER" .fhir input-cache output fsh-generated 2>/dev/null || true
-          chmod -R u+rwX .fhir input-cache output fsh-generated 2>/dev/null || true
-
-      - name: Verify expected IG output
-        if: success()
-        run: |
-          test -d output
-          test -f output/qa.html
-
-      - name: Upload output as artifact
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        if: always()
-        with:
-          if-no-files-found: warn
-          name: ig-output-${{ github.run_id }}-${{ github.run_attempt }}
-          path: output/
-          retention-days: 30
-
-      - name: Upload QA report
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
-        if: always()
-        with:
-          if-no-files-found: warn
-          name: qa-report-${{ github.run_id }}-${{ github.run_attempt }}
-          path: output/qa.html
-          retention-days: 30
-
-      - name: Report QA artifact status
-        if: always()
-        run: |
-          if [ -f output/qa.html ]; then
-            ERROR_COUNT=$(grep -oi 'errors' output/qa.html | wc -l || true)
-            echo "QA report generated. Found ${ERROR_COUNT} occurrence(s) of the word 'errors'."
-            echo "Check the qa-report artifact for details."
-          else
-            echo "QA report was not generated."
-          fi
-
-#  deploy-pages:
-#    runs-on: ubuntu-24.04
-#    needs: build
-#    if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-#    permissions:
-#      contents: read
-#      pages: write
-#      id-token: write
-#
-#    environment:
-#      name: github-pages
-#      url: ${{ steps.deployment.outputs.page_url }}
-#
-#    steps:
-#      - name: Download build artifact
-#        uses: actions/download-artifact@v4
-#        with:
-#          name: ig-output-${{ github.run_number }}
-#          path: output/
-#
-#      - name: Setup Pages
-#        uses: actions/configure-pages@v4
-#
-#      - name: Upload to Pages
-#        uses: actions/upload-pages-artifact@v3
-#        with:
-#          path: output/
-#
-#      - name: Deploy to GitHub Pages
-#        id: deployment
-#        uses: actions/deploy-pages@v4
+      - name: Run IG Publisher
+        run: bash ./_genonce.sh
