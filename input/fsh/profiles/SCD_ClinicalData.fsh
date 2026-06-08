@@ -93,7 +93,7 @@ Description: """
   element SHALL reference the SCDBiologicallyDerivedProduct instance(s)
   documenting the specific blood product(s) administered.
 """
-* usedReference only Reference(SCDBiologicallyDerivedProduct or SCDMedication or Device)
+* usedReference only Reference(SCDMedication or Device)
 
 // TODO: Add value set binding for transfusion procedures:
 // * code from SCDProcedureVS (extensible)

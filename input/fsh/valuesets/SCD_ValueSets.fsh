@@ -133,7 +133,7 @@ Description: """
 * $sct#230690007  "Cerebrovascular accident (disorder)"
 
 // Aplastic crisis
-* $sct#127040003  "Sickle cell disease with aplastic crisis"  // TODO: find specific code
+* $sct#60492007   "Aplastic crisis (disorder)"               // parvovirus B19-triggered aplastic crisis
 * $icd10cm#D57.09 "Hb-SS disease with crisis with other specified complication"
 
 // Fever/Sepsis in SCD (functional asplenia)
