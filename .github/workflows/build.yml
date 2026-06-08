@@ -28,7 +28,7 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Setup Ruby
+      - name: Setup Ruby 4.0
         uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f
         with:
           ruby-version: '4.0'
@@ -36,17 +36,8 @@ jobs:
       - name: Add Ruby gems user bin to PATH
         run: echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
 
-      - name: Install Bundler from Gemfile.lock and gems
-        run: |
-          # Ensure the exact bundler version from Gemfile.lock is used
-          BUNDLER_VERSION=$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -n1 | tr -d ' ')
-          if [ -n "$BUNDLER_VERSION" ]; then
-            gem install --user-install bundler:"$BUNDLER_VERSION"
-          else
-            gem install --user-install bundler
-          fi
-          echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
-          bundle _${BUNDLER_VERSION:-$(bundle -v | awk '{print $3}')}_ install --deployment --jobs 4 --retry 3
+      - name: Install Bundler and gems (use Gemfile.lock)
+        run: bundle install
 
       - name: Install SUSHI
         run: npm install -g fsh-sushi@3.19.0
