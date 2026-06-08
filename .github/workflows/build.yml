@@ -28,16 +28,28 @@ jobs:
         with:
           node-version: '24'
 
-      - name: Setup Ruby + Jekyll
+      - name: Setup Ruby
         uses: ruby/setup-ruby@afeafc3d1ab54a631816aba4c914a0081c12ff2f
         with:
           ruby-version: '4.0'
-      - run: |
+
+      - name: Add Ruby gems user bin to PATH
+        run: echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
+
+      - name: Install Bundler from Gemfile.lock and gems
+        run: |
+          # Ensure the exact bundler version from Gemfile.lock is used
+          BUNDLER_VERSION=$(grep -A1 "BUNDLED WITH" Gemfile.lock | tail -n1 | tr -d ' ')
+          if [ -n "$BUNDLER_VERSION" ]; then
+            gem install --user-install bundler:"$BUNDLER_VERSION"
+          else
+            gem install --user-install bundler
+          fi
           echo "$(ruby -e 'print Gem.user_dir')/bin" >> $GITHUB_PATH
-      - run: gem install --user-install bundler jekyll
+          bundle _${BUNDLER_VERSION:-$(bundle -v | awk '{print $3}')}_ install --deployment --jobs 4 --retry 3
 
       - name: Install SUSHI
-        run: npm install -g fsh-sushi
+        run: npm install -g fsh-sushi@3.19.0
 
       - name: Prepare cache directories
         run: |
@@ -63,6 +75,22 @@ jobs:
       - name: Download IG Publisher
         if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
         run: bash _updatePublisher.sh -y
+
+      - name: Verify publisher.jar SHA256 for version 2.2.8
+        run: |
+          EXPECTED="4eafde1dfb52c785d6b5998c34bcdc19791602f2685e2a1427cc6df98c7d27c6"
+          FILE="input-cache/publisher.jar"
+          if [ ! -f "$FILE" ]; then
+            echo "publisher.jar not found at $FILE" >&2
+            exit 1
+          fi
+          ACTUAL=$(sha256sum "$FILE" | awk '{print $1}')
+          echo "expected: $EXPECTED"
+          echo "actual:   $ACTUAL"
+          if [ "$ACTUAL" != "$EXPECTED" ]; then
+            echo "SHA256 mismatch for $FILE" >&2
+            exit 1
+          fi
 
       - name: Run IG Publisher
         run: bash ./_genonce.sh
