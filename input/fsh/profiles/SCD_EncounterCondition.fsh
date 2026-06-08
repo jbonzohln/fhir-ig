@@ -141,6 +141,8 @@ Description: """
 * onset[x] MS
 * abatement[x] MS
 * recordedDate MS
+* evidence MS
+* evidence.id MS
 
 // TODO: Add value set binding when SCDAcuteComplicationVS is defined:
 // * code from SCDAcuteComplicationVS (extensible)
@@ -222,6 +224,8 @@ Description: """
 * recordedDate MS
 * recorder MS
 * asserter MS
+* evidence MS
+* evidence.id MS
 
 // Extension slot for SCD genotype detail
 // TODO: Add extension reference once SCDGenotypeExtension is defined:

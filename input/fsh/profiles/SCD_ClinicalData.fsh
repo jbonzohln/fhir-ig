@@ -80,17 +80,20 @@ Description: """
 * performed[x] MS
 * performer MS
 * performer.actor MS
-* performer.actor ^short = "Practitioner, PractitionerRole, Organization, Patient, RelatedPerson, or Device involved in the procedure"
+* performer.actor only Reference(SCDPractitioner or SCDPractitionerRole or SCDOrganization)
 * reasonCode MS
 * reasonReference MS
-* reasonReference ^short = "Condition, observation, procedure, report, or document supporting the procedure"
+* reasonReference only Reference(SCDConditionEncounterDiagnosis or SCDConditionProblemsAndHealthConcerns)
 
 // SCD-specific: link transfusion procedure to blood product(s) used
-// NOTE: FHIR R4 Procedure.usedReference only allows Device, Medication, or Substance.
-// BiologicallyDerivedProduct is not an allowed target for Procedure.usedReference in R4.
-// Blood product linkage may be represented through narrative or a future extension.
 * usedReference MS
-* usedReference ^short = "Device, medication, or substance used during the procedure"
+* usedReference ^short = "Blood product(s) administered (SCDBiologicallyDerivedProduct)"
+* usedReference ^comment = """
+  When this Procedure represents a transfusion (simple or exchange), this
+  element SHALL reference the SCDBiologicallyDerivedProduct instance(s)
+  documenting the specific blood product(s) administered.
+"""
+* usedReference only Reference(SCDBiologicallyDerivedProduct or SCDMedication or Device)
 
 // TODO: Add value set binding for transfusion procedures:
 // * code from SCDProcedureVS (extensible)
