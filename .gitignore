@@ -7,3 +7,6 @@ Thumbs.db
 /template
 /.idea/
 /.fhir/
+/vendor/
+/.bundle
+/FHIR-us-uscdi-scd.xml
