@@ -60,7 +60,7 @@ jobs:
             -v "$PWD/.fhir:/root/.fhir" \
             -w /workspaces \
             "$IG_TOOLBOX_IMAGE" \
-            sushi
+            npm install -g fsh-sushi && sushi
 
       - name: Update Publisher with Docker
         if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
