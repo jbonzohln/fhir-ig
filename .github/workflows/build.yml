@@ -56,11 +56,11 @@ jobs:
       - name: Build IG with Docker
         run: |
           docker run --rm \
-            -v "$PWD:/workspaces" \
-            -v "$PWD/.fhir:/root/.fhir" \
-            -w /workspaces \
-            "$IG_TOOLBOX_IMAGE" \
-            npm install -g fsh-sushi && sushi
+          -v "$PWD:/workspaces" \
+          -v "$PWD/.fhir:/root/.fhir" \
+          -w /workspaces \
+          "$IG_TOOLBOX_IMAGE" \
+          bash -c "npm install -g fsh-sushi && sushi"
 
       - name: Update Publisher with Docker
         if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
