@@ -45,7 +45,7 @@ jobs:
           mkdir -p input-cache
 
       - name: Cache FHIR packages
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: ~/.fhir/packages
           key: fhir-packages-${{ runner.os }}-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package-list.json') }}
@@ -53,7 +53,7 @@ jobs:
             fhir-packages-${{ runner.os }}-
 
       - name: Cache IG publisher input-cache
-        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9
         with:
           path: input-cache
           key: ig-publisher-${{ runner.os }}-${{ hashFiles('sushi-config.yaml', 'sushi-config.yml', 'ig.ini', 'package-list.json') }}
