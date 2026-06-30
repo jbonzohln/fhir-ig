@@ -90,4 +90,4 @@ jobs:
           if-no-files-found: error
           name: ig-output-${{ github.run_id }}-${{ github.run_attempt }}
           path: output/full-ig.zip
-          retention-days: 30
+          retention-days: 7
