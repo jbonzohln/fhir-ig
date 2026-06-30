@@ -20,28 +20,28 @@ description: >
   exchange of clinical data for patients with Sickle Cell Disease (SCD)
   in alignment with the United States Core Data for Interoperability (USCDI)
   and US Core 8.0.1.
-status: active              # draft | active | retired | unknown
-version: 1.0.0
+status: draft              # draft | active | retired | unknown
+version: 0.1.0
 fhirVersion: 4.0.1
 copyrightYear: 2025+
-releaseLabel: STU1          # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
+releaseLabel: draft         # ci-build | draft | qa-preview | ballot | trial-use | release | update | normative+trial-use
 
 # -----------------------------------------------------------------------
 # Publisher & Contact Information
 # -----------------------------------------------------------------------
-# TODO: Update with actual publisher and contact details
+
 publisher:
-  name: HL7 International / Patient Care
-  url: http://www.hl7.org/Special/committees/patientcare
-  email: patientcare@lists.HL7.org
+  name: HL7 International / Public Health
+  url: https://www.hl7.org/Special/committees/pher
+  email: pher@lists.HL7.org
 
 contact:
-  - name: HL7 Patient Care Work Group
+  - name: HL7 Public Health Work Group
     telecom:
       - system: url
-        value: http://www.hl7.org/Special/committees/patientcare
+        value: http://www.hl7.org/Special/committees/pher
       - system: email
-        value: patientcare@lists.HL7.org
+        value: pher@lists.HL7.org
 
 # -----------------------------------------------------------------------
 # Jurisdiction
