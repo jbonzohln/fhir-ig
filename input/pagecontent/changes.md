@@ -37,6 +37,7 @@ CHANGE LOG PAGE — changes.md
 
 #### Planned Future Versions
 
+To be determined.
 <!-- TODO: Document roadmap items for future STU or normative versions:
        - Addition of patient-reported outcome (PRO) profiles
        - Expansion of genomics profiles beyond genotype classification

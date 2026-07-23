@@ -24,6 +24,12 @@ CONTENT TO INSERT:
 This Implementation Guide (IG) for the US Core Data for Interoperability Plus Sickle Cell Disease (USCDI+SCD) is the first product related to ASTP’s efforts to facilitate interoperability for Sickle Cell Disease (SCD) patient care-related data exchanges.  Two related Use Cases are addressed by this guide.
 ### USCDI+ SCD Data Element Mapping
 
+The Information Model below represents the information to be included in exchanges supporting the 2 Use Cases addressed by this IG. 
+Each box represents an information concept or class, and generally corresponds to an individual FHIR resource included in the IG. These resources contain multiple related data elements
+Each connecting line represents a relationship between the concepts. The text on the line describes the relationship represented and should be interpreted fron the line start to the arrowhead (e.g.: A Problem/Condition is evidenced by a Lab Result). 
+NOTE: There is no cardinality of the relationship represented in this model.  Actual manifestation within the FHIR resources (using resource references) may/may not follow the direction of the arrows.
+
+! UCSDI-SCD Info Model 20260330.jpg
 The table below maps known USCDI+ Sickle Cell Disease data elements to the
 corresponding FHIR profiles and elements in this IG.
 

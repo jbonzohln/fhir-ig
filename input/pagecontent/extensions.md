@@ -8,6 +8,8 @@ This page describes the FHIR extensions defined in the USCDI-SCD
 Implementation Guide. All extensions are available for download as part of
 the FHIR package (see [Downloads](downloads.html)).
 
+No new extensions were defined for this guide.
+
 <!-- TODO: For each extension, insert:
        - Clinical rationale (why base FHIR / US Core doesn't cover this)
        - Element(s) the extension is applied to

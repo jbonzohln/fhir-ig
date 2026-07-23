@@ -5,31 +5,16 @@ HOME PAGE — index.md
 This is the landing page of the USCDI-SCD Implementation Guide.
 It should provide a brief orienting summary and quick navigation links.
 
-CONTENT TO INSERT:
-  - A concise (2–4 paragraph) executive summary of the IG's purpose
-  - A high-level statement of scope (who uses it, what it covers)
-  - A prominent "Where to Start" or "Quick Navigation" section
-  - Acknowledgements / credits / sponsoring organizations
-  - Official HL7 ballot/publication status notice (if applicable)
-  - Any disclaimers (e.g., terminology licensing notices for SNOMED, LOINC)
-================================================================================
 {%- endcomment -%}
 
 ### Overview
 
-<!-- TODO: Insert 2–4 paragraph executive summary describing the purpose,
-           goals, and context of the USCDI + Sickle Cell Disease IG here. -->
 
 The **USCDI + Sickle Cell Disease Implementation Guide (USCDI-SCD)** specifies
 FHIR R4 (4.0.1) profiles and supporting artifacts to enable standardized
 exchange of clinical and administrative data relevant to patients living with
 Sickle Cell Disease (SCD). This guide extends and aligns with
 [US Core 8.0.1](http://hl7.org/fhir/us/core/STU8.0.1/).
-
-<!-- TODO: Insert mission statement / clinical rationale paragraph. -->
-
-<!-- TODO: Insert brief paragraph on the relationship to USCDI and federal
-           interoperability mandates (e.g., ONC 21st Century Cures Rule). -->
 
 ---
 

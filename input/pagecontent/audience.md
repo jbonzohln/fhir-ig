@@ -33,6 +33,7 @@ identifies primary reader groups and points each to the most relevant sections.
 
 ### For Clinical Informaticists
 
+To be developed.
 <!-- TODO: Insert a paragraph describing what clinical informaticists will
      find most valuable in this IG, e.g., the USCDI+ data element mapping,
      the clinical use cases, and the value set choices. -->
@@ -41,6 +42,7 @@ identifies primary reader groups and points each to the most relevant sections.
 
 ### For Developers and Implementers
 
+To be developed.
 <!-- TODO: Insert a paragraph for developers. Include:
        - Where to find the downloadable FSH source and FHIR packages
        - How to validate implementations against this IG
@@ -52,6 +54,7 @@ identifies primary reader groups and points each to the most relevant sections.
 
 ### For Hematologists and Clinical Subject Matter Experts
 
+To be developed.
 <!-- TODO: Insert a paragraph explaining how clinicians can engage with
      the IG, review profiles for clinical accuracy, and contribute to
      future versions. Avoid jargon; explain FHIR concepts simply. -->
@@ -60,6 +63,7 @@ identifies primary reader groups and points each to the most relevant sections.
 
 ### For Patients and Advocates
 
+To be developed.
 <!-- TODO: Insert a brief, plain-language paragraph explaining what this
      guide does (enables computers to share SCD medical records) and
      why it matters for patients (better coordinated care, fewer repeated

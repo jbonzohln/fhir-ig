@@ -168,7 +168,7 @@ Description: """
 Usage: #example
 
 * id = "maya-johnson-voc-encounter-dx"
-* category[us-core].coding[+] = $condition-category#encounter-diagnosis "Encounter Diagnosis"
+* category[+].coding[+] = $condition-category#encounter-diagnosis "Encounter Diagnosis"
 * clinicalStatus = $condition-clinical#active "Active"
 * verificationStatus = $condition-ver-status#confirmed "Confirmed"
 
@@ -228,7 +228,7 @@ Usage: #example
 
 * id = "maya-johnson-hgb-fractionation"
 * status = #final
-* category[us-core] = $observation-category#laboratory "Laboratory"
+* category[+] = $observation-category#laboratory "Laboratory"
 * category[+] = $scd-observation-category#hemoglobin-fractionation "Hemoglobin Fractionation"
 
 // Panel code
@@ -284,7 +284,7 @@ Usage: #example
 
 * id = "maya-johnson-spo2"
 * status = #final
-* category[VSCat] = $observation-category#vital-signs "Vital Signs"
+* category[+] = $observation-category#vital-signs "Vital Signs"
 * code = $loinc#59408-5 "Oxygen saturation in Arterial blood by Pulse oximetry"
 * subject = Reference(maya-johnson-patient)
 * encounter = Reference(maya-johnson-ed-encounter)
@@ -315,7 +315,7 @@ Usage: #example
 
 * id = "maya-johnson-pain-score"
 * status = #final
-* category[VSCat] = $observation-category#vital-signs "Vital Signs"
+* category[+] = $observation-category#vital-signs "Vital Signs"
 * category[+] = $scd-observation-category#scd-pain-assessment "SCD Pain Assessment"
 * code = $loinc#38208-5 "Pain severity - 0-10 verbal numeric rating [NRS]"
 * subject = Reference(maya-johnson-patient)
@@ -341,7 +341,9 @@ Usage: #example
 
 * id = "hydroxyurea-medication-example"
 * code.coding[+] = $rxnorm#202462 "hydroxyurea"
-* code.coding[+] = $rxnorm#1876366 "hydroxyurea 1000 MG Oral Tablet [Siklos]"
+* code.coding[+].system = "http://www.nlm.nih.gov/research/umls/rxnorm"
+* code.coding[=].code = #1876366
+* code.coding[=].display = "hydroxyurea 1000 MG Oral Tablet [Siklos]"
 * code.text = "Hydroxyurea 1000 mg oral tablet (Siklos)"
 * form.coding[+] = $sct#421026006 "Oral tablet (dose form)"
 
@@ -372,7 +374,10 @@ Usage: #example
 * reasonCode[+].coding[+] = $sct#30925003 "Sickle cell crisis (disorder)"
 * reasonCode[=].text = "Acute VOC with HbS% 58%; exchange transfusion to reduce HbS <30%"
 * reasonReference[+] = Reference(maya-johnson-voc-encounter-dx)
-* basedOn[+] = Reference(exchange-transfusion-order-example)
+
+// Link to blood product used
+* usedReference[+] = Reference(prbcs-antigen-matched-example)
+
 
 // ==============================================================================
 // Example: BiologicallyDerivedProduct — Antigen-Matched pRBCs
