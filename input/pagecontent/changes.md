@@ -4,7 +4,7 @@ CHANGE LOG PAGE — changes.md
 
 ### Change Log
 
-#### Version 1.0.0 (STU1 Ballot — 2025)
+#### Version 0.1.0 (DRAFT)
 
 <!-- TODO: Replace this placeholder with the actual change log entries
      once the IG has gone through ballot and publication cycles.

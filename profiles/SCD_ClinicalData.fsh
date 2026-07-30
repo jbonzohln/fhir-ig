@@ -93,7 +93,9 @@ Description: """
   element SHALL reference the SCDBiologicallyDerivedProduct instance(s)
   documenting the specific blood product(s) administered.
 """
-* usedReference only Reference(SCDBiologicallyDerivedProduct or SCDMedication or Device)
+* usedReference only Reference(SCDMedication or Device )
+//or SCDBiologicallyDerivedProduct  
+  
 
 ==============================================================================
 // SCDObservationLaboratoryResult

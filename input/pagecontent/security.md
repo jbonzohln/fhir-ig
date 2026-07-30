@@ -5,7 +5,7 @@ SECURITY AND PRIVACY PAGE — security.md
 ### Security and Privacy
 
 SCD data is highly sensitive. SCD disproportionately affects marginalized communities
-and that data breaches could lead to discrimination in employment, insurance, or social contexts. All HIPAA and 42 CFR Part 2 reqirements must be assiduously adhered to.  
+and data breaches could lead to discrimination in employment, insurance, or social contexts. All HIPAA and 42 CFR Part 2 requirements must be assiduously adhered to.  
 ---
 
 ### General Security Guidance
@@ -24,7 +24,7 @@ Please refer to:
 
 
 1. Genetic information (genotype) is covered by GINA (Genetic Information Nondiscrimination Act); may require additional access controls
-2. Substance use / pain medication history. There is hightened sensitivity around opioid prescribing records for SCD patients
+2. Substance use / pain medication history. There is heightened sensitivity around opioid prescribing records for SCD patients
 3. Mental health comorbidities are often documented alongside SCD
 4. Race and ethnicity data used for health equity reporting may impact de-identification requirements
 5. Pediatric patient data requires COPPA (Children's Online Privacy Protection Act) considerations for minors

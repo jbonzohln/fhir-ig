@@ -87,13 +87,15 @@ Description: """
 
 // SCD-specific: link transfusion procedure to blood product(s) used
 * usedReference MS
-* usedReference ^short = "Blood product(s) administered (SCDBiologicallyDerivedProduct)"
+* usedReference ^short  =  "Blood product(s) administered (SCDBiologicallyDerivedProduct)"
 * usedReference ^comment = """
   When this Procedure represents a transfusion (simple or exchange), this
   element SHALL reference the SCDBiologicallyDerivedProduct instance(s)
   documenting the specific blood product(s) administered.
 """
-* usedReference only Reference(SCDBiologicallyDerivedProduct or SCDMedication or Device)
+* usedReference only Reference (SCDMedication or Device)
+  //or SCDBiologicallyDerivedProduct or 
+  
 
 ==============================================================================
 // SCDObservationLaboratoryResult
@@ -209,7 +211,7 @@ Description: """
 
 // Component for panel results (e.g., hemoglobin fractionation panel)
 * component MS
-* component ^short = "Individual result components (e.g., Hgb fractionation panel)"
+* component ^short =  "Individual result components (e.g., Hgb fractionation panel)"
 * component.code MS
 * component.value[x] MS
 
@@ -274,7 +276,7 @@ Description: """
   for ACS workup.
 """
 
-* ^status = #active
+* ^status =  #active
 * ^experimental = false
 * ^date = "2025-01-01"
 * ^publisher = "HL7 International / Patient Care"
@@ -284,7 +286,7 @@ Description: """
 * status MS
 * category MS
 * code MS
-* code ^short = "Vital sign LOINC code (SpO2, pain score, BP, temp, RR, HR, weight)"
+* code ^short =  "Vital sign LOINC code (SpO2, pain score, BP, temp, RR, HR, weight)"
 * subject MS
 * subject only Reference(SCDPatient)
 * effective[x] MS
@@ -296,7 +298,7 @@ Description: """
 * component.dataAbsentReason MS
 
 // SpO2 and Pain Score are Must Support for SCD-specific monitoring
-* code ^comment = """
+* code ^comment =  """
   SCD-critical vital signs (SHALL be supported):
   - SpO2: LOINC 59408-5 (required for ACS detection)
   - Pain score (NRS 0-10): LOINC 38208-5 (required for VOC assessment)
@@ -379,16 +381,16 @@ Description: """
   See [Extensions](extensions.html) for the list of extensions applied here.
 """
 
-* ^status = #active
-* ^experimental = false
-* ^date = "2025-01-01"
-* ^publisher = "HL7 International / Patient Care"
-* ^jurisdiction = urn:iso:std:iso:3166#US "United States of America"
+* ^status =  #active
+* ^experimental =  false
+* ^date =  "2025-01-01"
+* ^publisher =  "HL7 International / Patient Care"
+* ^jurisdiction =  urn:iso:std:iso:3166#US "United States of America"
 
 // Product identification
 * productCode MS
-* productCode ^short = "Blood product type code (ISBT 128 or SNOMED CT)"
-* productCode ^comment = """
+* productCode ^short =  "Blood product type code (ISBT 128 or SNOMED CT)"
+* productCode ^comment =  """
   SHALL use ISBT 128 product codes where available. SNOMED CT codes MAY
   be included as an additional coding.
 
@@ -404,32 +406,32 @@ Description: """
 
 // Status of the product
 * status MS
-* status ^short = "available | unavailable | unsatisfactory | entered-in-error"
+* status ^short =  "available | unavailable | unsatisfactory | entered-in-error"
 
 // Product category
 * productCategory MS
-* productCategory ^short = "biologicalAgent | cells | fluid | tissue | organ"
-* productCategory ^comment = """
+* productCategory ^short =  "biologicalAgent | cells | fluid | tissue | organ"
+* productCategory ^comment =  """
   For red blood cell products: #cells
   For HPC products: #cells
 """
 
 // Request linkage — back to the transfusion ServiceRequest
 * request MS
-* request ^short = "Reference to the transfusion order (SCDServiceRequest)"
+* request ^short =  "Reference to the transfusion order (SCDServiceRequest)"
 * request only Reference(SCDServiceRequest)
 
 // Collection information
 * collection MS
-* collection ^short = "Collection details (donor vs autologous, collection time)"
+* collection ^short =  "Collection details (donor vs autologous, collection time)"
 * collection.source MS
-* collection.source ^short = "Donor (allogeneic) or patient (autologous)"
+* collection.source ^short =  "Donor (allogeneic) or patient (autologous)"
 * collection.collected[x] MS
 
 // Processing (irradiation, leukoreduction, antigen matching)
 * processing MS
-* processing ^short = "Product processing steps (irradiation, leukoreduction, CMV-neg)"
-* processing ^comment = """
+* processing ^short =  "Product processing steps (irradiation, leukoreduction, CMV-neg)"
+* processing ^comment =  """
   Document processing modifiers applied to the blood product. SCD-specific
   processing considerations:
   - Leukoreduction: Standard for SCD patients (reduces febrile reactions,
@@ -447,7 +449,7 @@ Description: """
 
 // Storage
 * storage MS
-* storage ^short = "Storage conditions and duration"
+* storage ^short =  "Storage conditions and duration"
 * storage.duration MS
 
 // Extension placeholders for SCD-specific blood product attributes

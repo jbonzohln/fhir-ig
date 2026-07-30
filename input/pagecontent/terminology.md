@@ -23,7 +23,7 @@ The following code systems are used in this IG:
 | RxNorm | http://www.nlm.nih.gov/research/umls/rxnorm | Current | Medications |
 | ICD-10-CM | http://hl7.org/fhir/sid/icd-10-cm | Current | Diagnoses (billing) |
 | CPT | http://www.ama-assn.org/go/cpt | Current | Procedures |
-| ISBT 128 | <!-- TODO: add URI --> | Current | Blood product coding |
+| ISBT 128 |https://www.isbt128.org/| Current | Blood product coding |
 | HL7 ActCode | http://terminology.hl7.org/CodeSystem/v3-ActCode | Current | Encounter class |
 
 

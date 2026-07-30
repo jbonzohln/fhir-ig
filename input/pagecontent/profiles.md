@@ -2,7 +2,7 @@
 PROFILES PAGE — profiles.md
 CONTENT TO INSERT: Narrative intro, profile groupings, notes on BiologicallyDerivedProduct
 {%- endcomment -%}
-Both use cases require similar query and response patterns to obtain the clinical information needed. An initial query will be executed to locate the appropriate patient record(s) (this may result in multiple eHR systems being identified as containing relevant information). When the target EHR system(s) is/are identified, a task-based, SCD-focused query will be executed for retrieval of the SCD-relevant resources
+Both use cases require similar query and response patterns to obtain the clinical information needed. An initial query will be executed to locate the appropriate patient record(s) (this may result in multiple eHR systems being identified as containing relevant information). When the target EHR system(s) is/are identified, a task-based, SCD-focused query will be executed for retrieval of the SCD-relevant resources.
 ### Profiles
 
 This page provides a narrative description of the profiles defined in this

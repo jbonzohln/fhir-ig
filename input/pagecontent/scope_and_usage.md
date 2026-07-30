@@ -10,7 +10,7 @@ SCOPE AND USAGE PAGE — scope_and_usage.md
 
 The following use cases and data exchange scenarios are **in scope** for
 this Implementation Guide:
-Transfer of Care: A SCD patient transitions their care from one provider to another. The new provider creates or updates the SCD diagnosis of the patient.
+Transfer of Care: An SCD patient transitions their care from one provider to another. The new provider creates or updates the SCD diagnosis of the patient.
 Emergency Department: An SCD patient presents at an Emergency Department (ED) for immediate, critical care. The new provider retrieves the clinical information needed in order to provide appropriate care to the patient.
 
 | # | Use Case | Key Profiles |

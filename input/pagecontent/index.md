@@ -38,13 +38,7 @@ Sickle Cell Disease (SCD). This guide extends and aligns with
 
 ### Acknowledgements
 
-<!-- TODO: Insert acknowledgements for:
-           - Sponsoring HL7 work group(s)
-           - Sickle Cell Disease clinical subject matter experts
-           - Patient advocacy organizations (e.g., Sickle Cell Disease Association of America)
-           - Federal partners (e.g., CDC, HRSA, NIH NHLBI)
-           - Contributing organizations and individuals
--->
+This Implementation Guide was developed as part of the USCDI+ Sickle Cell Disease (SCD) initiative with funding from the Office of the Assistant Secretary for Planning and Evaluation (ASPE) and the Office of the National Coordinator for Health Information Technology (ONC), through sustained collaboration across the warrior, clinical, research, regulatory, public health, and health IT communities.
 
 ---
 
