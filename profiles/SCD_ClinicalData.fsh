@@ -95,7 +95,7 @@ Description: """
 """
 * usedReference only Reference(SCDMedication or Device )
 //or SCDBiologicallyDerivedProduct  
-  
+
 
 ==============================================================================
 // SCDObservationLaboratoryResult
