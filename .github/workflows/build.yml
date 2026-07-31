@@ -64,9 +64,9 @@ jobs:
         if: ${{ hashFiles('input-cache/publisher.jar') == '' }}
         run: bash _updatePublisher.sh -y
 
-      - name: Verify publisher.jar SHA256 for version 2.2.8
+      - name: Verify publisher.jar SHA256 for version 2.3.0
         run: |
-          EXPECTED="4eafde1dfb52c785d6b5998c34bcdc19791602f2685e2a1427cc6df98c7d27c6"
+          EXPECTED="e842f2186117d9e41be457949e6a13e69a8d8590a680b6f3cf48a20f87bdabbd"
           FILE="input-cache/publisher.jar"
           if [ ! -f "$FILE" ]; then
             echo "publisher.jar not found at $FILE" >&2
