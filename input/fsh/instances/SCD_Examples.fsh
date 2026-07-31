@@ -351,7 +351,7 @@ Usage: #example
 // ==============================================================================
 // Example: Procedure — Automated Red Cell Exchange Transfusion
 // ==============================================================================
-
+/*
 Instance: maya-johnson-exchange-transfusion
 InstanceOf: SCDProcedure
 Title: "Example Procedure — Automated Red Cell Exchange Transfusion"
@@ -377,7 +377,7 @@ Usage: #example
 
 // Link to blood product used
 * usedReference[+] = Reference(prbcs-antigen-matched-example)
-
+*/
 
 // ==============================================================================
 // Example: BiologicallyDerivedProduct — Antigen-Matched pRBCs
