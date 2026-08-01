@@ -26,8 +26,6 @@ to address SCD-specific data exchange needs.
 ## Repository Structure
 
 ```
-uscdi-scd-ig/
-│
 ├── sushi-config.yaml               # SUSHI configuration (canonical, deps, pages, menu)
 ├── ig.ini                          # IG Publisher configuration
 ├── package.json                    # NPM package manifest
@@ -65,8 +63,7 @@ uscdi-scd-ig/
 │       ├── downloads.md            # Downloadable artifacts
 │       └── changes.md              # Change log
 │
-└── scripts/
-    └── build.sh                    # Build script (SUSHI + IG Publisher)
+└── _build.sh                       # Build script (SUSHI + IG Publisher, see also _build.bat)
 ```
 
 ---
@@ -113,7 +110,7 @@ uscdi-scd-ig/
 - **[Node.js](https://nodejs.org/) ≥ 18** (required for SUSHI)
 - **[SUSHI](https://fshschool.org/)** (FSH compiler): `npm install -g fsh-sushi`
 - **Java 17+** (required for IG Publisher)
-- **[HL7 IG Publisher](https://github.com/HL7/fhir-ig-publisher/releases)**: place `publisher.jar` in `input-cache/`
+- **[HL7 IG Publisher](https://github.com/HL7/fhir-ig-publisher/releases)**: `_build.sh update` downloads `publisher.jar` into `input-cache/` (it also checks the parent directory as a fallback)
 
 ---
 
@@ -130,7 +127,7 @@ npm install -g fsh-sushi
 sushi .
 
 # 4. Full build (SUSHI + IG Publisher)
-./scripts/build.sh
+./_build.sh build
 
 # 5. View output
 open output/index.html
