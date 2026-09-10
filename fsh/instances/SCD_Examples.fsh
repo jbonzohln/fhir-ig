@@ -347,7 +347,7 @@ Usage: #example
 * code.text = "Hydroxyurea 1000 mg oral tablet (Siklos)"
 * form.coding[+] = $sct#421026006 "Oral tablet (dose form)"
 
-/* Block commented out for debug puropses.
+
 // ==============================================================================
 // Example: Procedure — Automated Red Cell Exchange Transfusion
 // ==============================================================================
@@ -377,7 +377,7 @@ Usage: #example
 
 // Link to blood product used
 * usedReference[+] = Reference(prbcs-antigen-matched-example)
-*/
+
 
 // ==============================================================================
 // Example: BiologicallyDerivedProduct — Antigen-Matched pRBCs
