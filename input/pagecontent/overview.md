@@ -24,7 +24,7 @@ Each box represents an information concept or class, and generally corresponds t
 Each connecting line represents a relationship between the concepts. The text on the line describes the relationship represented and should be interpreted fron the line start to the arrowhead (e.g.: A Problem/Condition is evidenced by a Lab Result). 
 NOTE: There is no cardinality of the relationship represented in this model.  Actual manifestation within the FHIR resources (using resource references) may/may not follow the direction of the arrows.
 
-! UCSDI-SCD Info Model 20260330.jpg
+! images/UCSDI-SCD Info Model 20260330.jpg
 The table below maps known USCDI+ Sickle Cell Disease data elements to the
 corresponding FHIR profiles and elements in this IG.
 
@@ -56,4 +56,3 @@ The following profiles are defined or used in this IG:
 ---
 
 ### Conventions
-
