@@ -8,7 +8,7 @@
 **US Core Version:** 8.0.1  
 **Status:** STU1 Draft  
 
----
+
 
 ## Overview
 
@@ -21,7 +21,7 @@ The USCDI-SCD IG defines FHIR R4 profiles, extensions, value sets, code systems,
 and example instances that extend [US Core 8.0.1](http://hl7.org/fhir/us/core/STU8.0.1/)
 to address SCD-specific data exchange needs.
 
----
+
 
 ## Repository Structure
 
@@ -69,12 +69,12 @@ uscdi-scd-ig/
     └── build.sh                    # Build script (SUSHI + IG Publisher)
 ```
 
----
+
 
 ## Included Profiles
 
 | Profile | Base Resource | Parent Profile |
-|---|---|---|
+||||
 | USCDI-SCD Patient | Patient | US Core Patient 8.0.1 |
 | USCDI-SCD Practitioner | Practitioner | US Core Practitioner 8.0.1 |
 | USCDI-SCD PractitionerRole | PractitionerRole | US Core PractitionerRole 8.0.1 |
@@ -92,12 +92,12 @@ uscdi-scd-ig/
 | USCDI-SCD Vital Signs | Observation | US Core Vital Signs 8.0.1 |
 | USCDI-SCD BiologicallyDerivedProduct | BiologicallyDerivedProduct | FHIR 4.0.1 Base (no US Core parent) |
 
----
+
 
 ## Extensions
 
 | Extension | Context | Purpose |
-|---|---|---|
+||||
 | `scd-genotype` | Condition | SCD genotype/subtype (HbSS, HbSC, etc.) |
 | `scd-transfusion-antigen-match` | BiologicallyDerivedProduct, Procedure | Red cell antigen matching criteria |
 | `scd-hydroxyurea-adherence` | MedicationStatement, Observation | Hydroxyurea adherence level and method |
@@ -106,7 +106,7 @@ uscdi-scd-ig/
 | `scd-iron-chelation-indication` | MedicationRequest | Iron chelation trigger and threshold |
 | `scd-newborn-screen-reference` | Condition, Patient | Link to original newborn screening result |
 
----
+
 
 ## Prerequisites
 
@@ -115,7 +115,7 @@ uscdi-scd-ig/
 - **Java 17+** (required for IG Publisher)
 - **[HL7 IG Publisher](https://github.com/HL7/fhir-ig-publisher/releases)**: place `publisher.jar` in `input-cache/`
 
----
+
 
 ## Building the IG
 
@@ -136,7 +136,7 @@ sushi .
 open output/index.html
 ```
 
----
+
 
 ## Key TODOs Before Ballot
 
@@ -153,7 +153,7 @@ open output/index.html
 - [ ] Conduct clinical SME review of profiles and value sets
 - [ ] Submit for HL7 ballot (STU1)
 
----
+
 
 ## Contributing
 
@@ -162,7 +162,7 @@ open output/index.html
 
 Issues and pull requests welcome. Please follow [HL7 FHIR IG development conventions](https://confluence.hl7.org/display/FHIR/IG+Publisher+Documentation).
 
----
+
 
 ## License
 
